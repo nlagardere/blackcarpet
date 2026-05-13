@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLACK CARPET</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<div id="lobbyChoice">
+    <h1 class="title">BLACK CARPET</h1>
+    <button id="goCreateBtn">Créer une session</button>
+    <button id="goJoinBtn">Rejoindre une session</button>
+    <a href="tutorial.html">
+        <img src="assets/illustration_bg.gif" class="bg_illustration" alt="Red Carpet Illustration">
+    </a>
+</div>
+
+    <div id="lobbyCreate" class="hidden">
+        <h1 class="title">CRÉER</h1>
+        <input id="nickCreate" placeholder="Ton pseudo...">
+        <button id="createRoomBtn">Lancer la salle</button>
+        <button id="backCreateBtn">Retour</button>
+    </div>
+
+    <div id="lobbyJoin" class="hidden">
+        <h1 class="title">REJOINDRE</h1>
+        <input id="nickJoin" placeholder="Ton pseudo...">
+        <input id="roomInput" placeholder="Code (4 lettres)">
+        <button id="joinRoomBtn">Entrer</button>
+        <button id="backJoinBtn">Retour</button>
+    </div>
+
+    <div id="waitZone" class="hidden">
+        <h2>CODE : <span id="roomCode"></span></h2>
+        <p id="playerCount">0 joueurs connectés</p>
+        <div id="playerList"></div>
+        <button id="startBtn" class="hidden">DÉMARRER LE BRIEFING</button>
+    </div>
+
+    <div id="ui" class="hidden">
+        <div id="hud">
+            <span id="roleHint">RÔLE</span>
+            <span id="score">1000</span>
+        </div>
+        <div id="scoreBarWrap">
+            <div id="scoreBar"></div>
+        </div>
+        <button id="rumorBtn" class="hidden">ENVOYER UN LEAK</button>
+    </div>
+
+    <div id="game" class="hidden"></div>
+
+    <div id="gameover" class="hidden">
+        <h1 id="resTitle">GAME OVER</h1>
+        <p id="resSub"></p>
+        <button onclick="location.reload()">REJOUER</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

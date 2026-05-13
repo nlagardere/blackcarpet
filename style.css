@@ -1,0 +1,225 @@
+:root {
+    --gold: #d4af37;
+    --gold-bright: #f1d279;
+    --bg: #0b0b0b;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --danger: #ff4444;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: white;
+    overflow: hidden;
+    height: 100vh;
+    /* Empêche le zoom accidentel sur mobile lors des clics rapides */
+    touch-action: manipulation; 
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hidden { display: none !important; }
+
+/* Typo plus moderne */
+.title {
+    text-align: center;
+    margin-top: 20vh; /* Centré verticalement sur l'écran d'accueil */
+    font-size: 2.5rem;
+    letter-spacing: 8px;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    text-transform: uppercase;
+}
+
+/* Boutons adaptés au pouce (plus grands) */
+button {
+    display: block;
+    width: 80%;
+    max-width: 300px;
+    margin: 15px auto;
+    padding: 16px 20px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:active {
+    transform: scale(0.95); /* Effet d'enfoncement au toucher */
+    background: rgba(212, 175, 55, 0.3);
+}
+
+/* Inputs plus larges et lisibles */
+input {
+    display: block;
+    width: 80%;
+    max-width: 300px;
+    margin: 15px auto;
+    padding: 16px;
+    background: #1a1a1a;
+    border: 2px solid #333;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+    font-size: 1.1rem;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--gold);
+}
+
+/* Liste des joueurs plus élégante */
+#playerList {
+    margin: 20px auto;
+    max-width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+#playerList div {
+    background: var(--card-bg);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* GAME AREA */
+#game {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+}
+
+/* Notes (Leaks) beaucoup plus tactiles */
+.note {
+    position: absolute;
+    min-width: 80px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background: var(--card-bg);
+    border: 2px solid var(--gold);
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.note.big {
+    border-color: var(--danger);
+    background: rgba(255, 0, 0, 0.15);
+    font-size: 14px;
+    z-index: 50;
+}
+
+/* UI du haut (Score & Rôle) */
+#ui {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: env(safe-area-inset-top, 20px) 20px 20px 20px; /* Gère l'encoche/notch */
+    box-sizing: border-box;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(11,11,11,0.9), transparent);
+}
+
+#hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#scoreBarWrap {
+    height: 8px;
+    background: rgba(255,255,255,0.1);
+    margin-top: 15px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#scoreBar {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+    transition: width 0.4s ease-out;
+}
+
+/* Bouton Paparazzi (Action principale) */
+#rumorBtn {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: black;
+    border: none;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+    z-index: 101;
+    margin: 0;
+}
+
+#rumorBtn:active {
+    transform: translateX(-50%) scale(0.9);
+}
+
+/* Gameover */
+#gameover {
+    padding-top: 30vh;
+    text-align: center;
+    background: rgba(0,0,0,0.9);
+    position: absolute;
+    inset: 0;
+    z-index: 200;
+}
+
+.bg_illustration {
+    position: absolute;
+    bottom: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px; /* Évite que l'image soit trop immense sur PC */
+    height: auto;
+    z-index: -1; /* Derrière les boutons */
+    pointer-events: none;
+    opacity: 0.8; /* Légèrement tamisé pour ne pas bouffer le texte */
+    
+
+}
+
+/* Ajustement pour que le contenu ne soit pas collé à l'image */
+#lobbyChoice {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+}
